@@ -1,0 +1,8 @@
+1 -  Uma matriz que é usada para transformar um conjunto de coordenadas de um espaço para outro espaço através de uma transformação linear. Ou seja, a matriz de transformação será uma transformação linear que vai mapear um conjunto de pontos de um espaço para outro.
+
+2 - É talvez a transformação mais usada na manipulação 3d, onde você pode transformar e rotacionar um objeto a partir de uma matriz de rotação, com 3 eixos, X, Y e Z, assim conseguindo manipular objetos de forma precisa nas 3 dimensões
+
+3 - São dois métodos distintos, a projeção ortogonal não leva em conta a distancia do objeto em relação ao usuário, e falta profundidade ao objeto na perspectiva do usuário, apenas mantendo suas dimensões e aspectos em relação a um plano paralelo, como por exemplo em diagramas (ou autocad)
+A perspectiva leva em conta essa distância, assim dando a ilusão de profundidade para que pareça mais próxima ou distante ao usuário, sendo usada em animações por exemplo
+
+4 - é um buffer de profundidade que guarda a distancia de cada pixel em relação ao usuário, assim sendo utilizado em tempo real para distinção de objetos a ser exibido em frente de outros, pois esse buffer se atualiza a cada pixel renderizado, onde é exibido na tela e sua profundidade "guardada" nesse buffer
