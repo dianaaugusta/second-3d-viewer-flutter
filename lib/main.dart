@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled2/camera_preview_viewer.dart';
-import 'package:untitled2/photo_detection_face.dart';
+import 'package:untitled2/view/camera_preview_viewer.dart';
+import 'package:untitled2/view/photo_detection_face.dart';
 
 void main() {
   runApp(const MyApp());

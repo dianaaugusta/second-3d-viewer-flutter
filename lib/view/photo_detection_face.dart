@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:untitled2/object_3d_viewer.dart';
+import 'package:untitled2/view/object_3d_viewer.dart';
 
 class PhotoDetectionFace extends StatefulWidget {
   @override

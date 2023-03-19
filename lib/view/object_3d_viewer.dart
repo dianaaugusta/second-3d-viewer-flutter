@@ -30,7 +30,7 @@ class _MyHomePageState extends State<Object3dController> {
         child: Transform.scale(
           scale: scale,
           child: ModelViewer(
-            src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+            src: 'assets/SK_Ins_Crewman2.glb',
             alt: "future custom-made glasses",
             ar: true,
             autoRotate: false,
