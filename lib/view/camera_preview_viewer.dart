@@ -37,7 +37,11 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
   Future initializeCamera() async {
     availableCameras().then((availableCameras) {
       cameras = availableCameras;
+      //verifica se há cameras disponíveis para uso do app
       if (cameras.length > 0) {
+        //Cameras é um vetor, pois os celulares possuem mais de uma, portanto,
+        //podemos colocar o índice 0 para carregar a primeira e principal camera
+        //a traseira, mas como queremos a frontal, colocamos no indice 1
         controller = CameraController(cameras[1], ResolutionPreset.medium);
         controller?.initialize().then((_) {
           if (!mounted) {
@@ -54,6 +58,7 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
     });
   }
 
+  //faz o dispose da controller e da CameraController para não haver risco de sobreposição
   @override
   void dispose() {
     controller?.dispose();
@@ -66,19 +71,25 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
     if (controller == null || !(controller?.value.isInitialized ?? false)) {
       return Container();
     }
-    return Stack(children: [
-      AspectRatio(
-        aspectRatio: (controller?.value.aspectRatio ?? 0.0),
-        //Mostro o Preview da câmera dentro do AspectRatio do dispositivo
+    return Stack(
+      children: [
+        //Cria o preview da camera pegando toda a tela
+      SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         child: CameraPreview(controller!),
       ),
+
       //Posiciono o Objeto 3D para preencher a tela
       Positioned.fill(
         child: Object3dController(),
       ),
       //Texto para debuggar as faces processadas pelo ML Kit
-      Text(
-        facesDetected.isNotEmpty? facesDetected.first.toString() : "No faces"
+      Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: Text(
+          facesDetected.isNotEmpty? facesDetected.first.toString() : "No faces detected"
+        ),
       )
 
     ]);
@@ -94,7 +105,7 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
       InputImageData _dataProcessedFromImage = InputImageData(
         size: Size(image.width.toDouble(), image.height.toDouble()),
         imageRotation: InputImageRotation.rotation90deg,
-        inputImageFormat: InputImageFormat.bgra8888,
+        inputImageFormat: InputImageFormat.yuv420,
         //mapeando a imagem
         planeData: image.planes.map(
           (Plane plane) {
